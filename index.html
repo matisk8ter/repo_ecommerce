@@ -8,13 +8,18 @@
   <meta name="description" content="">
   <title>eMercado - Todo lo que busques está aquí</title>
 
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="1993934548-8jhftsuumr36skn5h5v9i5h67l4c13lg.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <style>
-    html, body{
+    html,
+    body {
       height: 100%;
     }
 
@@ -26,49 +31,115 @@
       padding-top: 40px;
       padding-bottom: 40px;
       /* background-color: #e4e3e3; */
-      background-color: #f0f0f0;
+      background-image: url(monta-tu-propia-tienda-online.jpg);
+      background-size: 100% 100%;
+      background-attachment: fixed;
+
     }
+
 
     .signin {
       width: 100%;
       max-width: 330px;
       padding: 15px;
       margin: auto;
-      background-color: #f0f0f0;
+      background-color: rgba(0, 0, 0, .1);
+      border-radius: 20px;
 
-      
+
     }
 
     .h3 {
-      font-size: 50px;
-      font-family: fantasy;
+      font-size: 20;
+      font-family: sans-serif;
+      padding-bottom: 20px;
+      font-weight: inherit;
+
+    }
+
+    .mb-4 {
       padding-bottom: 20px;
     }
-    
+
+    .btn {
+      background-color: rgb(139, 61, 103);
+    }
+
+    .contenedor {
+      margin-left: 450px;
+    }
+
+    .emercado {
+      padding-left: 50px;
+      padding-top: 20px;
+      border-top-style: solid;
+      border-top-width: 0px;
+      margin-bottom: 350px;
+      margin-right: 0px;
+      margin-left: -700px;
+      margin-top: -500px;
+      color: rgb(139, 61, 103);
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    h4 {
+      color: rgb(126, 126, 126);
+    }
   </style>
 </head>
 
 <body class="text-center">
-  <div class="container p-5">
-    <div class="alert alert-dangers" role="alert" style="position: relative; width:auto; top: 0;">
-      <form action="login.html" class="signin">
-  
-        <h1 class="h3 mb-3 font-weight-normal">Log in</h1>
-        <img src="login.png" class="mb-4"  alt="" width="72" height="72"><label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-        <label for="inputPassword" class="sr-only" >Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
-      </form>
+  <div class="contenedor">
+    <div class="signin">
+
+
+      <h1 class="h3 mb-3 font-weight-normal" style="color :rgb(44, 43, 43)">Iniciar sesión</h1>
+      <label for="inputUsuario" class="sr-only">Usuario</label>
+      <input type="text" id="inputUsuario" class="form-control" placeholder="Usuario" autofocus=""><br>
+      <label for="inputPassword" class="sr-only">contraseña</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="contraseña">
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> recordar
+        </label>
+      </div>
+      <button id="BotonSubmit" class="btn btn-lg btn-primary btn-block">Conectar</button>
+
+      <div id="alertaDom" class="alert alert-danger alertNone" role="alert">
+      </div>
     </div>
   </div>
+
+  <div class="emercado">
+    <div class="animacion">
+      <h1 class="display-3 ">e-MERCADO</h1>
+      <h4>tu e-commerce favorito</h4>
+    </div>
+  </div>
+
+  <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    <script>
+      function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+        console.log('Full Name: ' + profile.getName());
+
+        localStorage.setItem(
+        "User", { user: profile.getName() });
+        window.location = "cover.html";
+       
+
+        // The ID token you need to pass to your backend:
+        // var id_token = googleUser.getAuthResponse().id_token;
+        // console.log("ID Token: " + id_token);
+      }
+    </script>
+
+
+
 
   <script src="js/init.js"></script>
   <script src="js/login.js"></script>
 </body>
+
 </html>
