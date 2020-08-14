@@ -105,8 +105,19 @@
       </div>
       <button id="BotonSubmit" class="btn btn-lg btn-primary btn-block">Conectar</button>
 
-      <div id="alertaDom" class="alert alert-danger alertNone" role="alert">
-      </div>
+      <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+      <script>
+        function onSignIn(googleUser) {
+          // Useful data for your client-side scripts:
+          var profile = googleUser.getBasicProfile();
+          console.log('Full Name: ' + profile.getName());
+
+          localStorage.setItem(
+            "User", { user: profile.getName() });
+          window.location = "cover.html";  
+      </script>
+
+
     </div>
   </div>
 
@@ -117,23 +128,7 @@
     </div>
   </div>
 
-  <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-    <script>
-      function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log('Full Name: ' + profile.getName());
 
-        localStorage.setItem(
-        "User", { user: profile.getName() });
-        window.location = "cover.html";
-       
-
-        // The ID token you need to pass to your backend:
-        // var id_token = googleUser.getAuthResponse().id_token;
-        // console.log("ID Token: " + id_token);
-      }
-    </script>
 
 
 
