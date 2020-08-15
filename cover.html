@@ -18,6 +18,7 @@
 <body>
   <nav class="site-header sticky-top py-1 bg-dark">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
+      <a id="bienvenidaDOM" class="py-2 d-none d-md-inline-block text-light" href="#"></a>
       <a class="py-2 d-none d-md-inline-block" href="cover.html">Inicio</a>
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
@@ -107,12 +108,25 @@
   </footer>
 
   <script>
-    function signOut() {
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-        console.log('User signed out.');
-      });
-    }
+     let bienvenidaDOM = document.getElementById("bienvenidaDOM");
+        let userName = JSON.parse(localStorage.User);
+
+        bienvenidaDOM.innerHTML = `${userName.email}`;
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                window.location = "index.html";
+            });
+        };
+
+        function onLoad() {
+            gapi.load('auth2', function () {
+                gapi.auth2.init();
+            });
+        }
+
+
   </script>
   <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
   <script src="js/jquery-3.4.1.min.js"></script>
