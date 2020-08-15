@@ -108,25 +108,25 @@
   </footer>
 
   <script>
-     let bienvenidaDOM = document.getElementById("bienvenidaDOM");
-        let userName = JSON.parse(localStorage.User);
-
-        bienvenidaDOM.innerHTML = `${userName.email}`;
-
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                window.location = "index.html";
-            });
-        };
-
-        function onLoad() {
-            gapi.load('auth2', function () {
-                gapi.auth2.init();
-            });
-        }
 
 
+    let bienvenidaDOM = document.getElementById("bienvenidaDOM");
+    let userName = JSON.parse(localStorage.User);
+
+    bienvenidaDOM.innerHTML = `${userName.User}`;
+
+    function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        window.location = "index.html";
+      });
+    };
+
+    function onLoad() {
+      gapi.load('auth2', function () {
+        gapi.auth2.init();
+      });
+    }
   </script>
   <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
   <script src="js/jquery-3.4.1.min.js"></script>
