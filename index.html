@@ -140,7 +140,7 @@
       var id_token = googleUser.getAuthResponse().id_token;
 
       localStorage.setItem(
-        "User", { user: profile.getName() });
+        "User", JSON.stringify({ user: profile.getName() }));
       window.location = "cover.html";  
     }
   </script>

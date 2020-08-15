@@ -114,7 +114,7 @@
     let bienvenidaDOM = document.getElementById("bienvenidaDOM");
     let userName = JSON.parse(localStorage.User);
 
-    bienvenidaDOM.innerHTML = `hola ${userName.user}`;
+    bienvenidaDOM.innerHTML = `${userName.user}`;
 
     function signOut() {
       var auth2 = gapi.auth2.getAuthInstance();
