@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         if (validacion) {
             localStorage.setItem(
                 "User",
-                JSON.stringify({ user: usuario })
+                JSON.stringify({ user: usuario.value })
             );
             console.log({ localStorage });
             window.location = "cover.html";
