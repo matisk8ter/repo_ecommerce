@@ -137,6 +137,7 @@
       // Useful data for your client-side scripts:
       var profile = googleUser.getBasicProfile();
       console.log('Full Name: ' + profile.getName());
+      var id_token = googleUser.getAuthResponse().id_token;
 
       localStorage.setItem(
         "User", { user: profile.getName() });
