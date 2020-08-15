@@ -7,32 +7,40 @@ document.addEventListener("DOMContentLoaded", function (e) {
         let usuario = document.getElementById("inputUsuario");
         let password = document.getElementById("inputPassword");
         let BotonSubmit = document.getElementById("BotonSubmit");
-        let alertaDom = document.getElementById("alertaDom");
+        
 
 
         var validacion = true;
 
 
         if (usuario.value.trim() === "") {
-            usuario.classList.add("invalid");
+            
             validacion = false;
-            alertaDom.classList.remove("alertNone");
-            alert("el usuario no debe tener espacios en blanco y menos de 5 caracteres");
-        }
-        else {
-            usuario.classList.remove("invalid");
+            
+            alert("el usuario no debe tener espacios en blanco");
         }
 
+        if(usuario.value.trim().length < 5){
+
+            validacion = false;
+
+            alert("el usuario debe tener mas de 5 caracteres")
+        }
+        if(password.value.trim().length < 5){
+
+            validacion = false;
+
+            alert("la contraseña debe tener mas de 5 caracteres")
+        }
+        
 
         if (password.value.trim() === "") {
-            password.classList.add("invalid");
+            
             validacion = false;
-            alertaDom.classList.remove("alertNone");
-            alert("la contraseña no debe tener espacios en blanco y menos 5 caracteres");
+            
+            alert("la contraseña no debe tener espacios en blanco");
         }
-        else {
-            password.classList.remove("invalid");
-        }
+        
 
         if (validacion) {
             localStorage.setItem(

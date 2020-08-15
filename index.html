@@ -8,6 +8,11 @@
   <meta name="description" content="">
   <title>eMercado - Todo lo que busques está aquí</title>
 
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  />
+
   <meta name="google-signin-scope" content="profile email">
   <meta name="google-signin-client_id" content="1993934548-8jhftsuumr36skn5h5v9i5h67l4c13lg.apps.googleusercontent.com">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -33,7 +38,12 @@
       /* background-color: #e4e3e3; */
       background-image: url(monta-tu-propia-tienda-online.jpg);
       background-size: 100% 100%;
-      background-attachment: fixed;
+      /* background-attachment: fixed; */
+      background-attachment: cover;
+      border-top: 5px;
+      border-right: 5px;
+      
+      
 
     }
 
@@ -93,13 +103,13 @@
 </head>
 
 <body class="text-center">
-  <div class="contenedor">
-    <div class="signin">
+  <div class="contenedor ">
+    <div class="signin animate__animated animate__flipInY">
 
 
-      <h1 class="h3 mb-3 font-weight-normal" style="color :rgb(44, 43, 43)">Iniciar sesión</h1>
+      <h1 class="h3 mb-3 font-weight-norma " style="color :rgb(44, 43, 43)">Iniciar sesión</h1>
       <label for="inputUsuario" class="sr-only">Usuario</label>
-      <input type="text" id="inputUsuario" class="form-control" placeholder="Usuario" autofocus=""><br>
+      <input type="text" id="inputUsuario" class="form-control" placeholder="Usuario"><br>
       <label for="inputPassword" class="sr-only">contraseña</label>
       <input type="password" id="inputPassword" class="form-control" placeholder="contraseña">
       <div class="checkbox mb-3">
@@ -115,7 +125,7 @@
   </div>
 
   <div class="emercado">
-    <div class="animacion">
+    <div class="animate__animated animate__lightSpeedInLeft">
       <h1 class="display-3 ">e-MERCADO</h1>
       <h4>tu e-commerce favorito</h4>
     </div>
