@@ -4,6 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="google-signin-client_id" content="1993934548-8jhftsuumr36skn5h5v9i5h67l4c13lg.apps.googleusercontent.com">
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -41,12 +42,17 @@
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
       <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+      <div id="contenedor" style="display: none;">
+        <a id="nombreUser" class="py-2 d-none d-md-inline-block mr-5" href="#"></a>
+        <a id="salir" class="py-2 d-md-inline-block font-brand" onclick="signOut();" href="#">Salir</a>
+      </div>
     </div>
   </nav>
   <div class="container p-5">
     <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
       <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 11/10/2020) y Entrega 6 (Fecha de entrega: 25/10/2020).</p>
+      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 11/10/2020) y Entrega 6 (Fecha de entrega:
+        25/10/2020).</p>
       <hr>
       <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
     </div>
@@ -59,6 +65,8 @@
       <div></div>
     </div>
   </div>
+  
+  <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/dropzone.js"></script>

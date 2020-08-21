@@ -139,8 +139,7 @@
       console.log('Full Name: ' + profile.getName());
       var id_token = googleUser.getAuthResponse().id_token;
 
-      localStorage.setItem(
-        "User", JSON.stringify({ user: profile.getName() }));
+      localStorage.setItem("User", JSON.stringify({ user: profile.getName() }));
       window.location = "cover.html";  
     }
   </script>
