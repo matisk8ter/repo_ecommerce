@@ -70,6 +70,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     auth2.signOut().then(function () {
       window.location = "index.html";
     });
+    localStorage.clear();
+    window.location = "index.html";
   };
 
   function onLoad() {
