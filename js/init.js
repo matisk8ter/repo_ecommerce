@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-      window.location = "index.html";
+      location.href = "index.html";
     });
     localStorage.clear();
     window.location = "index.html";
