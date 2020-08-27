@@ -7,6 +7,8 @@ var currentCategoriesArray = [];
 var currentSortCriteria = undefined;
 var minCount = undefined;
 var maxCount = undefined;
+var buscar = undefined;
+
 
 function sortCategories(criteria, array) {
     let result = [];
@@ -44,28 +46,32 @@ function showCategoriesList() {
 
 
         if (((minCount == undefined) || (minCount != undefined && parseInt(category.cost) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(category.cost) <= maxCount))){
+            ((maxCount == undefined) || (maxCount != undefined && parseInt(category.cost) <= maxCount))) {
 
-        htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action">
-            <div class="row">
-                <div class="col-3">
-                     <img src="` + category.imgSrc + `" alt="` + category.description + `" class="img-thumbnail">
-                     </div>
-                        <div class="col">
-                         <div class="d-flex w-100 justify-content-between">
-                          <div class="mb-1">
-                           <h4>`+ category.name + " - USD " + category.cost + `</h4>
-                             <p> `+ category.description + ` </p>
-                                        
-                              </div>
-                              <small class="text-muted">` + category.soldCount + ` artículos</small>
+            if (buscar == undefined || category.name.toLowerCase().indexOf(buscar) != -1 || category.description.toLowerCase().indexOf(buscar) != -1) {
+                htmlContentToAppend += `
+                <div class="list-group-item list-group-item-action">
+                    <div class="row">
+                        <div class="col-3">
+                            <img src="` + category.imgSrc + `" alt="` + category.description + `" class="img-thumbnail">
                             </div>
-        
+                                <div class="col">
+                                <div class="d-flex w-100 justify-content-between">
+                                <div class="mb-1">
+                                <h4>`+ category.name + " - USD " + category.cost + `</h4>
+                                    <p> `+ category.description + ` </p>
+                                                
+                                    </div>
+                                    <small class="text-muted">` + category.soldCount + ` artículos</small>
+                                    </div>
+                
+                                    </div>
+                                </div>
                             </div>
-                         </div>
-                    </div>
-                   `
+                        `
+            }
+
+
         }
 
         document.getElementById("contenido").innerHTML = htmlContentToAppend;
@@ -107,8 +113,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
         sortAndShowCategories(ORDER_BY_PROD_SOLDCOUNT);
     });
 
-    
-    document.getElementById("clearRangeFilter").addEventListener("click", function(){
+
+    document.getElementById("clearRangeFilter").addEventListener("click", function () {
         document.getElementById("rangeFilterCountMin").value = "";
         document.getElementById("rangeFilterCountMax").value = "";
 
@@ -118,28 +124,35 @@ document.addEventListener("DOMContentLoaded", function (e) {
         showCategoriesList();
     });
 
-    document.getElementById("rangeFilterCount").addEventListener("click", function(){
+    document.getElementById("rangeFilterCount").addEventListener("click", function () {
         //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
         //de productos por categoría.
         minCount = document.getElementById("rangeFilterCountMin").value;
         maxCount = document.getElementById("rangeFilterCountMax").value;
 
-        if ((minCount != undefined) && (minCount != "") && (parseInt(minCount)) >= 0){
+        if ((minCount != undefined) && (minCount != "") && (parseInt(minCount)) >= 0) {
             minCount = parseInt(minCount);
         }
-        else{
+        else {
             minCount = undefined;
         }
 
-        if ((maxCount != undefined) && (maxCount != "") && (parseInt(maxCount)) >= 0){
+        if ((maxCount != undefined) && (maxCount != "") && (parseInt(maxCount)) >= 0) {
             maxCount = parseInt(maxCount);
         }
-        else{
+        else {
             maxCount = undefined;
         }
 
         showCategoriesList();
     });
+
+    document.getElementById("buscador").addEventListener("input", function(e){
+
+        buscar = document.getElementById("buscador").value.toLowerCase();
+
+        showCategoriesList();
+    })
 
 });
 
