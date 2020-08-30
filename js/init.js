@@ -45,7 +45,7 @@ var getJSONData = function (url) {
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
 
-
+  let logeo = document.getElementById("logeo");
   let claveUser = localStorage.getItem("User");
   let nombreUser = document.getElementById("nombreUser");
   let nombreContenedor = document.getElementById("contenedor");
@@ -55,6 +55,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
     nombreUser.innerText = nombreUser.innerText + claveUser.user;
     nombreContenedor.style = "display: inline-block";
   }
+  else{
+    logeo.style = "display: inline-block";
+  }
+  
   
   document.getElementById("salir").addEventListener("click", function (e) {
 
