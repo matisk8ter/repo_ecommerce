@@ -19,17 +19,26 @@
 <body>
   <nav class="site-header sticky-top py-1 bg-dark">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="cover.html">Inicio</a>
-      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <div id="contenedor" style="display: none;">
-        <a id="nombreUser" class="py-2 d-none d-md-inline-block mr-5" href="#"></a>
-        <a id="salir" class="py-2 d-md-inline-block font-brand ml-5" onclick="signOut();" href="#">Salir</a>
+
+      <a class="py-2 d-none d-md-inline-block mt-2" href="cover.html">Inicio</a>
+      <a class="py-2 d-none d-md-inline-block mt-2" href="categories.html">Categorías</a>
+      <a class="py-2 d-none d-md-inline-block mt-2" href="products.html">Productos</a>
+      <a class="py-2 d-none d-md-inline-block mt-2" href="sell.html">Vender</a>
+      <a class="py-2 d-none d-md-inline-block mt-2" href="cart.html">Mi carrito</a>
+
+      <!-- danger button -->
+      <div class="btn-group" id="contenedor" style="display: none;">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          <a id="nombreUser" class="py-2 d-none d-md-inline-block" style="color: white;"></a>
+        </button>
+        <div class="dropdown-menu">
+          <a id="salir" class="dropdown-item" onclick="signOut(); onLoad();" href="#">Salir</a>
+        </div>
+       
       </div>
       <div id="logeo" style="display: none;">
-        <a class="py-2 d-none d-md-inline-block mr-5" style="color: rgb(177, 90, 169)" href="index.html">Conectar</a>
+        <a class="py-2 d-none d-md-inline-block mr-5 mt-2" style="color: rgb(255, 255, 255);" href="index.html">Conectar</a>
       </div>
 
     </div>
@@ -59,7 +68,7 @@
         </div>
       </div>
 
-     <!-- filtro  -->
+      <!-- filtro  -->
       <div class="row justify-content-end">
         <div class="col-md-6"></div>
         <div class="col-md-6 col-sm-12 mb-1 container">
@@ -91,51 +100,57 @@
       </div>
 
 
-      <!-- volver arriba -->
+      <!-- contenido a motrar -->
       <div id="contenido" class="container p-5">
+        
         <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
         </div>
       </div>
-      <footer class="text-muted bg-light">
-        <div class="container">
-          <p class="float-right">
-            <a href="#">Volver arriba</a>
-          </p>
+    </div>
+  </main>
 
-        </div>
-      </footer>
+  <!-- volver arriba -->
+  <footer class="text-muted bg-light">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Volver arriba</a>
+      </p>
 
-      <div id="spinner-wrapper">
-        <div class="lds-ring">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
+    </div>
+  </footer>
 
-      <script>
-        function signOut() {
-          var auth2 = gapi.auth2.getAuthInstance();
-          auth2.signOut().then(function () {
-            location.href = "index.html";
-          });
-          localStorage.clear();
-          window.location = "index.html";
-        };
 
-        function onLoad() {
-          gapi.load('auth2', function () {
-            gapi.auth2.init();
-          });
-        }
-      </script>
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
 
-      <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-      <script src="js/jquery-3.4.1.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/init.js"></script>
-      <script src="js/products.js"></script>
+  <script>
+    function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        location.href = "index.html";
+      });
+      localStorage.clear();
+      window.location = "index.html";
+    };
+
+    function onLoad() {
+      gapi.load('auth2', function () {
+        gapi.auth2.init();
+      });
+    }
+  </script>
+
+  <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/products.js"></script>
 </body>
 
 </html>

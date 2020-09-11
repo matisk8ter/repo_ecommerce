@@ -50,9 +50,10 @@ function showCategoriesList() {
 
             if (buscar == undefined || category.name.toLowerCase().indexOf(buscar) != -1 || category.description.toLowerCase().indexOf(buscar) != -1) {
                 htmlContentToAppend += `
-                <div class="list-group-item list-group-item-action">
-                    <div class="row">
-                        <div class="col-3">
+                <a href="product-info.html" class="list-group-item-action">
+                    <div class="list-group-item list-group-item-action">
+                        <div class="row">
+                            <div class="col-3">
                             <img src="` + category.imgSrc + `" alt="` + category.description + `" class="img-thumbnail">
                             </div>
                                 <div class="col">
@@ -65,10 +66,11 @@ function showCategoriesList() {
                                     <small class="text-muted">` + category.soldCount + ` artículos</small>
                                     </div>
                 
-                                    </div>
                                 </div>
                             </div>
-                        `
+                    </div>
+                </a>
+                `
             }
 
 
