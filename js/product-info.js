@@ -84,44 +84,47 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
             comentariosArray = resultObj.data;
         };
-    });
 
-
-    getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-
-            categoryProduct = resultObj.data;
-
-            let nameProducto = document.getElementById("categoryName");
-            let descripcionProductos = document.getElementById("descripcionProductos");
-            let costProducto = document.getElementById("costProducto");
-            let categry = document.getElementById("productCategory");
-            let soldCount = document.getElementById("soldCount");
-
-            nameProducto.innerHTML = categoryProduct.name;
-            descripcionProductos.innerHTML = categoryProduct.description;
-            costProducto.innerHTML = categoryProduct.currency + - + categoryProduct.cost
-            categry.innerHTML = categoryProduct.category;
-            soldCount.innerHTML = categoryProduct.soldCount;
-
-
-            showImagesProductos(categoryProduct.images, comentariosArray);
-        };
-
-        getJSONData(PRODUCTS_URL).then(function (resultObj) {
+        getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
             if (resultObj.status === "ok") {
-                relatedProducts = resultObj.data;
+
+                categoryProduct = resultObj.data;
+
+                let nameProducto = document.getElementById("categoryName");
+                let descripcionProductos = document.getElementById("descripcionProductos");
+                let costProducto = document.getElementById("costProducto");
+                let categry = document.getElementById("productCategory");
+                let soldCount = document.getElementById("soldCount");
+
+                nameProducto.innerHTML = categoryProduct.name;
+                descripcionProductos.innerHTML = categoryProduct.description;
+                costProducto.innerHTML = categoryProduct.currency + - + categoryProduct.cost
+                categry.innerHTML = categoryProduct.category;
+                soldCount.innerHTML = categoryProduct.soldCount;
+
+
+                showImagesProductos(categoryProduct.images, comentariosArray);
             };
-    
-            showProductRelated(categoryProduct.relatedProducts)
-    
+
+            getJSONData(PRODUCTS_URL).then(function (resultObj) {
+                if (resultObj.status === "ok") {
+                    relatedProducts = resultObj.data;
+                };
+
+                showProductRelated(categoryProduct.relatedProducts)
+
+            });
+
+
+
         });
 
-      
-
     });
 
-    
+
+
+
+
 
 
     let userLoged = localStorage.getItem("User");
