@@ -2,6 +2,29 @@ var categoryProduct = {};
 var comentariosArray = [];
 var relatedProducts = {};
 
+
+function showProductRelated(array) {
+    let htmlProductRelated = "";
+
+    for (let item of array) {
+
+        let prodRel = relatedProducts[item];
+
+        htmlProductRelated += `
+        <div class="card mr-3 h-10 w-25">
+          <a href="#" class=" custom-card">
+            <img class="bd-placeholder-img card-img-top" src="${prodRel.imgSrc}">
+            <h3 class="m-3">${prodRel.name}</h3>
+            <div class="card-body">
+              <p class="card-text">${prodRel.description}</p>
+            </div>
+          </a>
+        </div>
+        `;
+    }
+    document.getElementById("productoRelacionado").innerHTML = htmlProductRelated;
+}
+
 function showImagesProductos(array) {
 
     let htmlContentToAppend = "";
@@ -52,27 +75,7 @@ function showImagesProductos(array) {
 
 }
 
-function showProductRelated(array) {
-    let htmlProductRelated = "";
 
-    for (let item of array) {
-
-        let prodRel = relatedProducts[item];
-
-        htmlProductRelated += `
-        <div class="card mr-3 h-10 w-25">
-          <a href="#" class=" custom-card">
-            <img class="bd-placeholder-img card-img-top" src="${prodRel.imgSrc}">
-            <h3 class="m-3">${prodRel.name}</h3>
-            <div class="card-body">
-              <p class="card-text">${prodRel.description}</p>
-            </div>
-          </a>
-        </div>
-        `;
-    }
-    document.getElementById("productoRelacionado").innerHTML = htmlProductRelated;
-}
 
 
 
