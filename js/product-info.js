@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
             comentariosArray = resultObj.data;
         }
-    })
+    });
 
     getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
