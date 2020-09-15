@@ -1,7 +1,8 @@
 var categoryProduct = {};
 var comentariosArray = [];
+var relatedProducts = {};
 
-function showImagesProductos(array, arrayComment) {
+function showImagesProductos(array) {
 
     let htmlContentToAppend = "";
     let comentariosParaHtml = "";
@@ -48,6 +49,29 @@ function showImagesProductos(array, arrayComment) {
 
     }
 
+
+}
+
+function showProductRelated(array) {
+    let htmlProductRelated = "";
+
+    for (let item of array) {
+
+        let prodRel = relatedProducts[item];
+
+        htmlProductRelated += `
+        <div class="card mr-3" style="width: 250px;">
+          <a href="#" class=" custom-card">
+            <img class="bd-placeholder-img card-img-top" src="${prodRel.imgSrc}">
+            <h3 class="m-3">${prodRel.name}</h3>
+            <div class="card-body">
+              <p class="card-text">${prodRel.description}</p>
+            </div>
+          </a>
+        </div>
+        `;
+    }
+    document.getElementById("productoRelacionado").innerHTML = htmlProductRelated;
 }
 
 
@@ -57,6 +81,16 @@ function showImagesProductos(array, arrayComment) {
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
+
+    getJSONData(PRODUCTS_URL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+            relatedProducts = resultObj.data;
+
+        }
+        showProductRelated(categoryProduct.relatedProducts)
+
+    });
+
 
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
@@ -86,6 +120,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 
 
+
+
+
     let userLoged = localStorage.getItem("User");
     if (userLoged) {
         document.getElementById("contenido-texto").style = "display: inline-block";
@@ -95,8 +132,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
         // fecha
         let now = new Date();
-        let tiempo = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} `;
-        tiempo += `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()} `;
+        let tiempo = `${now.getFullYear()} -${now.getMonth() + 1} -${now.getDate()} `;
+        tiempo += `${now.getHours()}: ${now.getMinutes()}: ${now.getSeconds()} `;
 
         let star = document.querySelectorAll(".sr");
         let resultado = "";
@@ -109,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 
         let newComment = {
-            score : parseInt(resultado),
+            score: parseInt(resultado),
             description: document.getElementById("textoComentario").value,
             user: JSON.parse(localStorage.getItem("User")).user,
             dateTime: tiempo
