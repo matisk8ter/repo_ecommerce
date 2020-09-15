@@ -3,10 +3,10 @@ var comentariosArray = [];
 var relatedProducts = {};
 
 
-function showProductRelated(array) {
+function showProductRelated(arrayProduct) {
     let htmlProductRelated = "";
 
-    for (let item of array) {
+    for (let item of arrayProduct) {
 
         let prodRel = relatedProducts[item];
 
@@ -21,7 +21,7 @@ function showProductRelated(array) {
           </a>
         </div>
         `;
-    }
+    };
     document.getElementById("productoRelacionado").innerHTML = htmlProductRelated;
 }
 
@@ -40,11 +40,9 @@ function showImagesProductos(array) {
                 <img class="img-fluid img-thumbnail" src="` + images + `" alt="">
             </div>
         </div>
-        `
-
+        `;
         document.getElementById("imagenesProductInfo").innerHTML = htmlContentToAppend;
-
-    }
+    };
 
 
     for (let i = 0; i < comentariosArray.length; i++) {
@@ -65,13 +63,9 @@ function showImagesProductos(array) {
 
         comentariosParaHtml += `<div style="text-align: right;">${puntos}</div><hr>`
 
+    };
 
-
-
-        document.getElementById("contComent").innerHTML = comentariosParaHtml;
-
-    }
-
+    document.getElementById("contComent").innerHTML = comentariosParaHtml;
 
 }
 
@@ -85,22 +79,13 @@ function showImagesProductos(array) {
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
 
-    getJSONData(PRODUCTS_URL).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            relatedProducts = resultObj.data;
-
-        }
-        showProductRelated(categoryProduct.relatedProducts)
-
-    });
-
-
     getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
 
             comentariosArray = resultObj.data;
-        }
+        };
     });
+
 
     getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
@@ -110,20 +95,33 @@ document.addEventListener("DOMContentLoaded", function (e) {
             let nameProducto = document.getElementById("categoryName");
             let descripcionProductos = document.getElementById("descripcionProductos");
             let costProducto = document.getElementById("costProducto");
+            let categry = document.getElementById("productCategory");
+            let soldCount = document.getElementById("soldCount");
 
             nameProducto.innerHTML = categoryProduct.name;
             descripcionProductos.innerHTML = categoryProduct.description;
             costProducto.innerHTML = categoryProduct.currency + - + categoryProduct.cost
-
+            categry.innerHTML = categoryProduct.category;
+            soldCount.innerHTML = categoryProduct.soldCount;
 
 
             showImagesProductos(categoryProduct.images, comentariosArray);
-        }
+        };
+
+        getJSONData(PRODUCTS_URL).then(function (resultObj) {
+            if (resultObj.status === "ok") {
+                relatedProducts = resultObj.data;
+            };
+    
+            showProductRelated(categoryProduct.relatedProducts)
+    
+        });
+
+      
+
     });
 
-
-
-
+    
 
 
     let userLoged = localStorage.getItem("User");
@@ -163,3 +161,4 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 
 });
+
