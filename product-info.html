@@ -47,34 +47,34 @@
   </style>
 
 
-<nav class="site-header sticky-top py-1 bg-dark">
-  <div class="container d-flex flex-column flex-md-row justify-content-between">
+  <nav class="site-header sticky-top py-1 bg-dark">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
 
-    <a class="py-2 d-none d-md-inline-block mt-2" href="cover.html">Inicio</a>
-    <a class="py-2 d-none d-md-inline-block mt-2" href="categories.html">Categorías</a>
-    <a class="py-2 d-none d-md-inline-block mt-2" href="products.html">Productos</a>
-    <a class="py-2 d-none d-md-inline-block mt-2" href="sell.html">Vender</a>
+      <a class="py-2 d-none d-md-inline-block mt-2" href="cover.html">Inicio</a>
+      <a class="py-2 d-none d-md-inline-block mt-2" href="categories.html">Categorías</a>
+      <a class="py-2 d-none d-md-inline-block mt-2" href="products.html">Productos</a>
+      <a class="py-2 d-none d-md-inline-block mt-2" href="sell.html">Vender</a>
 
 
-    <!-- danger button -->
-    <div class="btn-group" id="contenedor" style="display: none;">
-      <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">
-        <a id="nombreUser" class="py-2 d-none d-md-inline-block" style="color: white;"></a>
-      </button>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="cart.html">Mi carrito</a>
-        <a class="dropdown-item" href="my-profile.html">Perfil</a>
-        <div class="dropdown-divider"></div>
-        <a id="salir" class="dropdown-item" onclick="signOut(); onLoad();" href="#">Salir</a>
+      <!-- danger button -->
+      <div class="btn-group" id="contenedor" style="display: none;">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          <a id="nombreUser" class="py-2 d-none d-md-inline-block" style="color: white;"></a>
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="cart.html">Mi carrito</a>
+          <a class="dropdown-item" href="my-profile.html">Perfil</a>
+          <div class="dropdown-divider"></div>
+          <a id="salir" class="dropdown-item" onclick="signOut(); onLoad();" href="#">Salir</a>
+        </div>
+      </div>
+      <div id="logeo" style="display: none;">
+        <a class="py-2 d-none d-md-inline-block mr-5 mt-2" style="color: rgb(255, 255, 255);"
+          href="index.html">Conectar</a>
       </div>
     </div>
-    <div id="logeo" style="display: none;">
-      <a class="py-2 d-none d-md-inline-block mr-5 mt-2" style="color: rgb(255, 255, 255);"
-        href="index.html">Conectar</a>
-    </div>
-  </div>
-</nav>
+  </nav>
   <!-- Productos -->
   <main role="main">
     <div class="container mt-5">
@@ -103,14 +103,15 @@
           </div>
         </dd>
       </dl>
+      <br>
 
-        <dt>Producto Relacionado</dt>
-        <dd>
-          <div class="row text-center text-lg-left pt-2" id="productoRelacionado">
-          </div>
-        </dd>
+      <dt>Producto Relacionado</dt>
+      <dd>
+        <div class="row text-center text-lg-left pt-2" id="productoRelacionado">
+        </div>
+      </dd>
       </dl>
-
+      <br>
 
 
       <!-- comentarios -->
