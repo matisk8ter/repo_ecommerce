@@ -60,7 +60,7 @@ function showProductRelated(array) {
         let prodRel = relatedProducts[item];
 
         htmlProductRelated += `
-        <div class="card mr-3" style="width: 250px;">
+        <div class="card mr-3 h-10 w-25">
           <a href="#" class=" custom-card">
             <img class="bd-placeholder-img card-img-top" src="${prodRel.imgSrc}">
             <h3 class="m-3">${prodRel.name}</h3>
