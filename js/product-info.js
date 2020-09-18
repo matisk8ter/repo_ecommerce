@@ -33,19 +33,19 @@ function showImagesProductos(array) {
     htmlContentToAppend += `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="${array[0]}" class="d-block" alt="">
+        <img src="${array[0]}" class="d-block w-100" alt="">
       </div>
       <div class="carousel-item">
-        <img src="${array[1]}" class="d-block" alt="">
+        <img src="${array[1]}" class="d-block w-100" alt="">
       </div>
       <div class="carousel-item">
-        <img src="${array[2]}" class="d-block" alt="">
+        <img src="${array[2]}" class="d-block w-100" alt="">
       </div>
       <div class="carousel-item">
-        <img src="${array[3]}" class="d-block" alt="">
+        <img src="${array[3]}" class="d-block w-100" alt="">
       </div>
       <div class="carousel-item">
-        <img src="${array[4]}" class="d-block" alt="">
+        <img src="${array[4]}" class="d-block w-100" alt="">
       </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -56,7 +56,9 @@ function showImagesProductos(array) {
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>
-  </div>`
+  </div>
+  
+  `
 
     document.getElementById("imagenesProductInfo").innerHTML = htmlContentToAppend;
 
