@@ -1,16 +1,17 @@
 var categoryProduct = {};
 var comentariosArray = [];
 var relatedProducts = {};
+var carusel = {};
 
 
 function showProductRelated(arrayProduct) {
-    let htmlProductRelated = "";
+  let htmlProductRelated = "";
 
-    for (let item of arrayProduct) {
+  for (let item of arrayProduct) {
 
-        let prodRel = relatedProducts[item];
+    let prodRel = relatedProducts[item];
 
-        htmlProductRelated += `
+    htmlProductRelated += `
         <div class="card mr-3 h-10 w-25">
           <a href="#" class=" custom-card">
             <img class="bd-placeholder-img card-img-top" src="${prodRel.imgSrc}">
@@ -21,16 +22,16 @@ function showProductRelated(arrayProduct) {
           </a>
         </div>
         `;
-    };
-    document.getElementById("productoRelacionado").innerHTML = htmlProductRelated;
+  };
+  document.getElementById("productoRelacionado").innerHTML = htmlProductRelated;
 }
 
 function showImagesProductos(array) {
 
-    let htmlContentToAppend = "";
-    let comentariosParaHtml = "";
+  let htmlContentToAppend = "";
+  let comentariosParaHtml = "";
 
-    htmlContentToAppend += `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  htmlContentToAppend += `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="${array[0]}" class="d-block w-100" alt="">
@@ -57,33 +58,33 @@ function showImagesProductos(array) {
       <span class="sr-only">Next</span>
     </a>
   </div>
-  
   `
 
-    document.getElementById("imagenesProductInfo").innerHTML = htmlContentToAppend;
+
+  document.getElementById("imagenesProductInfo").innerHTML = htmlContentToAppend;
 
 
-    for (let i = 0; i < comentariosArray.length; i++) {
-        let puntos = "";
-        let comment = comentariosArray[i];
+  for (let i = 0; i < comentariosArray.length; i++) {
+    let puntos = "";
+    let comment = comentariosArray[i];
 
-        comentariosParaHtml += comment.user + "  dice : <br><br>"
-        comentariosParaHtml += comment.description + "<br><br>"
-        comentariosParaHtml += " fecha : " + comment.dateTime + "<br><br>"
+    comentariosParaHtml += comment.user + "  dice : <br><br>"
+    comentariosParaHtml += comment.description + "<br><br>"
+    comentariosParaHtml += " fecha : " + comment.dateTime + "<br><br>"
 
 
-        for (let i = 1; i <= comment.score; i++) {
-            puntos += `<span class="fa fa-star checked"></span>`;
-        }
-        for (let i = comment.score + 1; i <= 5; i++) {
-            puntos += `<span class="fa fa-star"></span>`;
-        }
+    for (let i = 1; i <= comment.score; i++) {
+      puntos += `<span class="fa fa-star checked"></span>`;
+    }
+    for (let i = comment.score + 1; i <= 5; i++) {
+      puntos += `<span class="fa fa-star"></span>`;
+    }
 
-        comentariosParaHtml += `<div style="text-align: right;">${puntos}</div><hr>`
+    comentariosParaHtml += `<div style="text-align: right;">${puntos}</div><hr>`
 
-    };
+  };
 
-    document.getElementById("contComent").innerHTML = comentariosParaHtml;
+  document.getElementById("contComent").innerHTML = comentariosParaHtml;
 
 }
 
@@ -97,85 +98,84 @@ function showImagesProductos(array) {
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
 
-    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
+  getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
+    if (resultObj.status === "ok") {
+
+      comentariosArray = resultObj.data;
+
+      getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
         if (resultObj.status === "ok") {
 
-            comentariosArray = resultObj.data;
+          categoryProduct = resultObj.data;
+
+          let nameProducto = document.getElementById("categoryName");
+          let descripcionProductos = document.getElementById("descripcionProductos");
+          let costProducto = document.getElementById("costProducto");
+          let categry = document.getElementById("productCategory");
+          let soldCount = document.getElementById("soldCount");
+
+         
+          nameProducto.innerHTML = categoryProduct.name;
+          descripcionProductos.innerHTML = categoryProduct.description;
+          costProducto.innerHTML = categoryProduct.currency + - + categoryProduct.cost
+          categry.innerHTML = categoryProduct.category;
+          soldCount.innerHTML = categoryProduct.soldCount;
+
+
+          showImagesProductos(categoryProduct.images, comentariosArray);
         };
 
-        getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
-            if (resultObj.status === "ok") {
+      });
 
-                categoryProduct = resultObj.data;
+    };
+    getJSONData(PRODUCTS_URL).then(function (resultObj) {
+      if (resultObj.status === "ok") {
+        relatedProducts = resultObj.data;
+      };
 
-                let nameProducto = document.getElementById("categoryName");
-                let descripcionProductos = document.getElementById("descripcionProductos");
-                let costProducto = document.getElementById("costProducto");
-                let categry = document.getElementById("productCategory");
-                let soldCount = document.getElementById("soldCount");
-
-                nameProducto.innerHTML = categoryProduct.name;
-                descripcionProductos.innerHTML = categoryProduct.description;
-                costProducto.innerHTML = categoryProduct.currency + - + categoryProduct.cost
-                categry.innerHTML = categoryProduct.category;
-                soldCount.innerHTML = categoryProduct.soldCount;
-
-
-                showImagesProductos(categoryProduct.images, comentariosArray);
-            };
-
-            getJSONData(PRODUCTS_URL).then(function (resultObj) {
-                if (resultObj.status === "ok") {
-                    relatedProducts = resultObj.data;
-                };
-
-                showProductRelated(categoryProduct.relatedProducts)
-
-            });
-
-        });
+      showProductRelated(categoryProduct.relatedProducts)
 
     });
 
+  });
 
 
 
 
-    
 
-    let userLoged = localStorage.getItem("User");
-    if (userLoged) {
-        document.getElementById("contenido-texto").style = "display: inline-block";
+  let userLoged = localStorage.getItem("User");
+  if (userLoged) {
+    document.getElementById("contenido-texto").style = "display: inline-block";
+  }
+
+  document.getElementById("botonEnviar").addEventListener('click', () => {
+
+    // fecha
+    let now = new Date();
+    let tiempo = `${now.getFullYear()} -${now.getMonth() + 1} -${now.getDate()} `;
+    tiempo += `${now.getHours()}: ${now.getMinutes()}: ${now.getSeconds()} `;
+
+    let star = document.querySelectorAll(".sr");
+    let resultado = "";
+
+    for (let radio of star) {
+      if (radio.checked) {
+        resultado = radio.value;
+      }
     }
 
-    document.getElementById("botonEnviar").addEventListener('click', () => {
 
-        // fecha
-        let now = new Date();
-        let tiempo = `${now.getFullYear()} -${now.getMonth() + 1} -${now.getDate()} `;
-        tiempo += `${now.getHours()}: ${now.getMinutes()}: ${now.getSeconds()} `;
+    let newComment = {
+      score: parseInt(resultado),
+      description: document.getElementById("textoComentario").value,
+      user: JSON.parse(localStorage.getItem("User")).user,
+      dateTime: tiempo
+    };
 
-        let star = document.querySelectorAll(".sr");
-        let resultado = "";
+    comentariosArray.push(newComment);
 
-        for (let radio of star) {
-            if (radio.checked) {
-                resultado = radio.value;
-            }
-        }
-
-
-        let newComment = {
-            score: parseInt(resultado),
-            description: document.getElementById("textoComentario").value,
-            user: JSON.parse(localStorage.getItem("User")).user,
-            dateTime: tiempo
-        };
-
-        comentariosArray.push(newComment);
-
-        showImagesProductos(categoryProduct, comentariosArray);
-    });
+    showImagesProductos(categoryProduct.images, comentariosArray);
+  });
 
 
 
