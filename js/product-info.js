@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
           let categry = document.getElementById("productCategory");
           let soldCount = document.getElementById("soldCount");
 
-         
+
           nameProducto.innerHTML = categoryProduct.name;
           descripcionProductos.innerHTML = categoryProduct.description;
           costProducto.innerHTML = categoryProduct.currency + - + categoryProduct.cost
@@ -125,17 +125,19 @@ document.addEventListener("DOMContentLoaded", function (e) {
           showImagesProductos(categoryProduct.images, comentariosArray);
         };
 
+        getJSONData(PRODUCTS_URL).then(function (resultObj) {
+          if (resultObj.status === "ok") {
+            relatedProducts = resultObj.data;
+          };
+
+          showProductRelated(categoryProduct.relatedProducts)
+
+        });
+        
       });
 
     };
-    getJSONData(PRODUCTS_URL).then(function (resultObj) {
-      if (resultObj.status === "ok") {
-        relatedProducts = resultObj.data;
-      };
 
-      showProductRelated(categoryProduct.relatedProducts)
-
-    });
 
   });
 
