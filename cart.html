@@ -6,6 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="google-signin-client_id" content="1993934548-8jhftsuumr36skn5h5v9i5h67l4c13lg.apps.googleusercontent.com">
 
+
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <title>eMercado - Todo lo que busques está aquí</title>
@@ -28,6 +29,14 @@
         font-size: 3.5rem;
       }
     }
+
+    .abs-center {
+    
+      align-items: center;
+      justify-content: center;
+     
+    }
+
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -63,15 +72,124 @@
       </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 11/10/2020) y Entrega 6 (Fecha de entrega:
-        25/10/2020).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+
+
+
+  <!--  -->
+  <br>
+  <br>
+  <div class="container h-100">
+    <div class="row justify-content-center h-100" id="contenidoCar">
+      <table class="table col-sm-8 align-self-center text-center list-group-item">
+        <tr>
+          <th>Artículo</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Sub Total</th>
+          <th>eliminar</th>
+        </tr>
+        <tbody id="listado">
+        </tbody>
+
+      </table>
     </div>
+    <!--  -->
+    <br>
+    <div class="container row justify-content-center h-100">
+      <!--  -->
+      <div class="table col-sm-8 align-self-center">
+
+        <h3 class="mb-3 text-center">Tipos de envio</h3>
+        <br>
+        <!-- inputs -->
+        <div class="list-group-item d-flex justify-content-between lh-condensed">
+          <div class="custom-control custom-radio">
+            <input id="goldradio" name="publicationType" type="radio" class="custom-control-input" value="5" checked
+              required>
+            <label class="custom-control-label" for="goldradio">Gold </label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" value="8"
+              required>
+            <label class="custom-control-label" for="premiumradio">Express </label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" value="15"
+              required>
+            <label class="custom-control-label" for="standardradio">Estándar </label>
+          </div>
+        </div>
+        <!--  -->
+       <br>
+
+
+        <div class="order-md-1">
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h5 class="my-0">Porcentaje</h5>
+                <small class="text-muted">porcentaje que se cobra según el tipo de envio</small>
+              </div>
+              <strong id="comissionText">-</strong>
+            </li>
+
+
+
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h5 class="my-0">Días</h5>
+                <small class="text-muted">máximo de dias que puede demorar la entrega</small>
+              </div>
+              <strong id="diasQueDemora">-</strong>
+            </li>
+
+
+
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h5 class="my-0">Costo del envio</h5>
+                <small class="text-muted">costo neto del envio en dolares</small>
+              </div>
+              <strong id="totalCostText">-</strong>
+            </li>
+
+
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h5 class="my-0">Total</h5>
+                <small class="text-muted">total de la compra más el envio en Dolares</small>
+              </div>
+              <strong id="total">-</strong>
+            </li>
+
+
+          </ul>
+        </div>
+      </div>
+      <!--  -->
+
+
+      <!--  -->
+
+      <table class="radios" style="width:100%">
+        <thead>
+          <tr>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          </tr>
+        </thead>
+        <tbody id="porcent"></tbody>
+      </table>
+    </div>
+
   </div>
+  <!--  -->
+
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -82,19 +200,19 @@
   </div>
   <script>
     function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      location.href = "index.html";
-    });
-    localStorage.clear();
-    window.location = "index.html";
-  };
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        location.href = "index.html";
+      });
+      localStorage.clear();
+      window.location = "index.html";
+    };
 
-  function onLoad() {
-    gapi.load('auth2', function () {
-      gapi.auth2.init();
-    });
-  }
+    function onLoad() {
+      gapi.load('auth2', function () {
+        gapi.auth2.init();
+      });
+    }
   </script>
   <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
   <script src="js/jquery-3.4.1.min.js"></script>
