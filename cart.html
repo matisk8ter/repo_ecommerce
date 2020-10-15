@@ -31,12 +31,11 @@
     }
 
     .abs-center {
-    
+
       align-items: center;
       justify-content: center;
-     
-    }
 
+    }
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -125,7 +124,7 @@
           </div>
         </div>
         <!--  -->
-       <br>
+        <br>
 
 
         <div class="order-md-1">
@@ -188,42 +187,166 @@
         </thead>
         <tbody id="porcent"></tbody>
       </table>
+
+      <!-- formulario -->
+
+      <div class="col-sm-8">
+
+        <!-- boton que activa el modal -->
+        <div class="row">
+          <button type="button" class="m-1 btn btn-link" data-toggle="modal" data-target="#contidionsModal">Forma de
+            pago</button>
+        </div>
+
+        <!-- modal -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Forma de pago</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="container">
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- formulario  -->
+        <div id="cuerpo"></div>
+        <br>
+        <form id="needs-validation" novalidate>
+          <div>
+            <h3 class="mb-3 text-center">Datos de envío</h3>
+            <hr>
+            <input id="nombre" type="text" class="form-control" placeholder="Nombre" required>
+            <div class="invalid-feedback"> por favor, ingrese su nombre</div><br>
+            <input id="apellido" type="text" class="form-control" placeholder="Apellido" required>
+            <div class="invalid-feedback"> por favor, ingrese su apellido</div><br>
+            <input id="dir" type="text" class="form-control" placeholder="Dirección" required>
+            <div class="invalid-feedback"> por favor, ingrese su dirección</div><br>
+            <input id="numero" type="text" class="form-control" placeholder="Número de casa" required>
+            <div class="invalid-feedback">por favor, ingrese su numero de apt</div><br>
+            <input type="text" id="barr" class="form-control" placeholder="Barrio" required>
+            <div class="invalid-feedback">por favor, ingrese su barrio</div><br>
+          </div>
+          <div>
+            <hr>
+            <label for="pais">Pais</label><br>
+            <select class="form-control" id="pais" required>
+              <option>Uruguay</option>
+              <option>Argentina</option>
+              <option>Brasil</option>
+              <option>Chile</option>
+
+            </select><br>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-success btn-block">Confirmar</button>
+            <button type="submit" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+          </div>
+
+        </form>
+
+      </div>
     </div>
 
-  </div>
-  <!--  -->
+    <br><br><br>
 
 
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+
+    <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
-  </div>
-  <script>
-    function signOut() {
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-        location.href = "index.html";
-      });
-      localStorage.clear();
-      window.location = "index.html";
-    };
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          location.href = "index.html";
+        });
+        localStorage.clear();
+        window.location = "index.html";
+      };
 
-    function onLoad() {
-      gapi.load('auth2', function () {
-        gapi.auth2.init();
+      function onLoad() {
+        gapi.load('auth2', function () {
+          gapi.auth2.init();
+        });
+      }
+
+
+
+      document.addEventListener("DOMContentLoaded", function () {
+
+        let form = document.getElementById("needs-validation");
+        let alert = "";
+
+        form.addEventListener("submit", function (e) {
+
+          if (form.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation();
+
+
+          } else {
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            let confirmData = {
+              usuario: document.getElementById("nombre").value + " " + document.getElementById("apellido").value,
+              pais: document.getElementById("pais").value,
+              dir: document.getElementById("dir").value,
+              numero: document.getElementById("numero").value,
+              barrio: document.getElementById("barr").value,
+              dias: document.getElementById("diasQueDemora").innerHTML
+            };
+
+
+            alert = `
+            <div class="alert alert-dismissible alert-success show" role="alert">
+            <span>${confirmData.usuario}, su compra se a realizado con exito</span>
+            <p>
+                su compra se enviara a ${confirmData.dir}, al pais ${confirmData.pais}
+                 en ${confirmData.dias} dias maximo   
+            </p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+            </div>
+            `;
+
+            document.getElementById("cuerpo").innerHTML = alert
+
+          };
+          form.classList.add("was-validated")
+        });
       });
-    }
-  </script>
-  <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/dropzone.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/cart.js"></script>
+
+
+    </script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/dropzone.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/cart.js"></script>
 </body>
 
 </html>
