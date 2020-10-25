@@ -44,6 +44,7 @@ function eliminar(i) {
 
     }
     calculoTotal()
+    
 }
 // porcentajes
 
@@ -70,7 +71,6 @@ function calcProc() {
 
 
 function calculoTotal() {
-
 
     let total = 0;
 
@@ -113,6 +113,7 @@ function showProduct(array) {
         if (productos.currency === "UYU") {
             productos.unitCost = productos.unitCost / 40;
         }
+        let sub = productos.unitCost * productos.count;
 
         contenidoCarrito += `
             <tr>
@@ -125,7 +126,7 @@ function showProduct(array) {
             
                 <td class=""><input style="width: 60px;" onchange="calculoSubTotal(${productos.unitCost}, ${i})" type="number" id="cantidad${i}" value="${productos.count}" min="1"></td>
 
-                <td class=""><span class="subtotal" id="subtotalProducts${i}" style="font-weight: bold;">${productos.unitCost * productos.count}</span></td>
+                <td class=""><span class="subtotal" id="subtotalProducts${i}" style="font-weight: bold;">${sub}</span></td>
 
                 <td class=""><botton class="btn btn-danger" onclick="eliminar(${i})">X</botton></td>
              </tr>
@@ -221,6 +222,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
         calculoTotal();
 
     });
+
+    let radiosInput = document.getElementsByName("publicationType");
+    for(let i = 0 ; i< radiosInput.length; i++){
+        radiosInput[i].addEventListener("change", function (){
+            calcProc()
+        })
+    }
 
     let tipoPago = document.getElementsByName("formaPago");
     for (let i = 0; i < tipoPago.length; i++) {
