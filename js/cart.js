@@ -32,7 +32,7 @@ function eliminar(i) {
     if (arrayContenido.length > 1) {
         arrayContenido.splice(i, 1);
         showProduct(arrayContenido);
-        
+
     } else {
         document.getElementById("contenidoCar").innerHTML =
             `           
@@ -41,7 +41,7 @@ function eliminar(i) {
                         <br><a class="ml-2" href="categories.html">agrega un artículo al carrito aquí</a>
                         
         `
-        
+
     }
     calculoTotal()
 }
@@ -136,6 +136,57 @@ function showProduct(array) {
     calculoTotal();
 }
 
+function selectPago() {
+
+    let pagoSelect = document.getElementsByName("formaPago");
+
+    for (let i = 0; i < pagoSelect.length; i++) {
+        if (pagoSelect[i].checked && pagoSelect[i].value == "1") {
+            document.getElementById("datosTarjeta").classList.remove("d-none");
+            document.getElementById("datosBanco").classList.add("d-none");
+        }
+        else if (pagoSelect[i].checked && pagoSelect[i].value == "2") {
+            document.getElementById("datosTarjeta").classList.add("d-none");
+            document.getElementById("datosBanco").classList.remove("d-none");
+        }
+    }
+}
+
+
+function validacionPago() {
+
+    let numbTarjeta = document.getElementById("numTarjeta").value;
+    let titularTarjeta = document.getElementById("titularTarjeta").value;
+    let codigoSeguridad = document.getElementById("codigoSeguridad").value;
+    let cuenta = document.getElementById("cuenta").value;
+    let formaDePago = document.getElementsByName("formaPago")
+    let pagoValido = true;
+
+    for (let i = 0; i < formaDePago.length; i++) {
+        if (formaDePago[i].checked && formaDePago[i].value == "1") {
+            if (numbTarjeta.trim() == "" || titularTarjeta.trim() == "" || codigoSeguridad.trim() == "") {
+                pagoValido = false;
+            }
+            else {
+                pagoValido = true;
+            }
+        }
+        else if (formaDePago[i].checked && formaDePago[i].value == "2") {
+            if (cuenta.trim() == "") {
+                pagoValido = false;
+            }
+            else {
+                pagoValido = true;
+            }
+        }
+    }
+    return pagoValido;
+}
+
+function completo(){
+    window.location = "cover.html"
+}
+
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
@@ -169,6 +220,92 @@ document.addEventListener("DOMContentLoaded", function (e) {
         comissionPercentage = 0.05;
         calculoTotal();
 
+    });
+
+    let tipoPago = document.getElementsByName("formaPago");
+    for (let i = 0; i < tipoPago.length; i++) {
+        tipoPago[i].addEventListener("change", function () {
+            selectPago();
+        });
+    }
+
+    // validacion form
+
+    let form = document.getElementById("needs-validation");
+
+    form.addEventListener("submit", function (e) {
+
+        if (form.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (validacionPago()) {
+
+                document.getElementById("btnModal").classList.remove("btn-primary");
+                document.getElementById("btnModal").classList.remove("btn-danger");
+                document.getElementById("btnModal").classList.add("btn-outline-success");
+                document.getElementById("alertError").innerHTML = `
+              <br>
+              <div class="alert-success alert alert-dismissible show" role="alert">            
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">Forma de pago completa</h5>
+              </div>
+              `
+            } else {
+                e.preventDefault();
+                e.stopPropagation();
+
+                document.getElementById("btnModal").classList.remove("btn-primary");
+                document.getElementById("btnModal").classList.remove("btn-success");
+                document.getElementById("btnModal").classList.add("btn-danger");
+                document.getElementById("alertError").innerHTML = `
+                <br>
+                <div class="alert-danger alert alert-dismissible show" role="alert"><br>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">Debe complete la forma de pago!</h5><br>
+                </div>
+                
+                 `
+
+            }
+
+        } else {
+            if (validacionPago()) {
+                document.getElementById("carrito").innerHTML = `
+                <br>
+                <div class="alert-success alert alert-dismissible show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="completo()";
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">Se ha confirmado con extio!</h5>
+                </div>
+
+                `
+
+            } else {
+                e.preventDefault();
+                e.stopPropagation();
+                document.getElementById("btnModal").classList.remove("btn-primary");
+                document.getElementById("btnModal").classList.remove("btn-success");
+                document.getElementById("btnModal").classList.add("btn-danger");
+                document.getElementById("alertError").innerHTML = `
+                <br>
+                <div class="alert-danger alert alert-dismissible show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">Debe complete la forma de pago!</h5>
+                </div>
+                 `
+            }
+
+
+        };
+        form.classList.add("was-validated")
     });
 
 });
