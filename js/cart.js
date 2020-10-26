@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
             arrayContenido = resultObj.data.articles;
 
             showProduct(arrayContenido);
-            calcProc();
+            
         }
 
     });
@@ -223,12 +223,12 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
     });
 
-    let radiosInput = document.getElementsByName("publicationType");
-    for(let i = 0 ; i< radiosInput.length; i++){
-        radiosInput[i].addEventListener("change", function (){
-            calcProc()
-        })
-    }
+    // let radiosInput = document.getElementsByName("publicationType");
+    // for(let i = 0 ; i< radiosInput.length; i++){
+    //     radiosInput[i].addEventListener("change", function (){
+    //         calcProc()
+    //     })
+    // }
 
     let tipoPago = document.getElementsByName("formaPago");
     for (let i = 0; i < tipoPago.length; i++) {
