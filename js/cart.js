@@ -103,7 +103,8 @@ function calculoSubTotal(costo, i) {
 
 
 function showProduct(array) {
-
+    let pCost ;
+    
     let contenidoCarrito = "";
 
     for (let i = 0; i < array.length; i++) {
@@ -111,9 +112,12 @@ function showProduct(array) {
         let productos = array[i];
 
         if (productos.currency === "UYU") {
-            productos.unitCost = productos.unitCost / 40;
+            pCost = productos.unitCost / 40;
+        }else{
+            pCost = productos.unitCost;
         }
-        let sub = productos.unitCost * productos.count;
+        
+        let costSub = pCost * productos.count;
 
         contenidoCarrito += `
             <tr>
@@ -124,9 +128,9 @@ function showProduct(array) {
 
                 <td class="">USD ${productos.unitCost}</td>
             
-                <td class=""><input style="width: 60px;" onchange="calculoSubTotal(${productos.unitCost}, ${i})" type="number" id="cantidad${i}" value="${productos.count}" min="1"></td>
+                <td class=""><input style="width: 60px;" onchange="calculoSubTotal(${pCost}, ${i})" type="number" id="cantidad${i}" value="${productos.count}" min="1"></td>
 
-                <td class=""><span class="subtotal" id="subtotalProducts${i}" style="font-weight: bold;">${sub}</span></td>
+                <td class=""><span class="subtotal" id="subtotalProducts${i}" style="font-weight: bold;">${costSub}</span></td>
 
                 <td class=""><botton class="btn btn-danger" onclick="eliminar(${i})">X</botton></td>
              </tr>
@@ -200,6 +204,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
             showProduct(arrayContenido);
             
+            
         }
 
     });
@@ -223,12 +228,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
     });
 
-    // let radiosInput = document.getElementsByName("publicationType");
-    // for(let i = 0 ; i< radiosInput.length; i++){
-    //     radiosInput[i].addEventListener("change", function (){
-    //         calcProc()
-    //     })
-    // }
+  
 
     let tipoPago = document.getElementsByName("formaPago");
     for (let i = 0; i < tipoPago.length; i++) {
