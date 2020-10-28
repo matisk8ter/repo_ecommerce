@@ -50,25 +50,18 @@ function showCategoriesList() {
 
             if (buscar == undefined || category.name.toLowerCase().indexOf(buscar) != -1 || category.description.toLowerCase().indexOf(buscar) != -1) {
                 htmlContentToAppend += `
-                <a href="product-info.html" class="list-group-item-action">
-                    <div class="list-group-item list-group-item-action">
-                        <div class="row">
-                            <div class="col-3">
-                            <img src="` + category.imgSrc + `" alt="` + category.description + `" class="img-thumbnail">
-                            </div>
-                                <div class="col">
-                                <div class="d-flex w-100 justify-content-between">
-                                <div class="mb-1">
-                                <h4>`+ category.name + " - USD " + category.cost + `</h4>
-                                    <p> `+ category.description + ` </p>
-                                                
-                                    </div>
-                                    <small class="text-muted">` + category.soldCount + ` artículos</small>
-                                    </div>
-                
-                                </div>
-                            </div>
-                    </div>
+              <a href ="product-info.html" class="mt-5 col-md-6 list-group-item-action mb-4 shadow-sm"
+                <div class="col-6">
+                <img src="` + category.imgSrc + `" alt="` + category.description + `" class="img-thumbnail">
+                    <div class="card-body">
+                  <p class="card-text">`+ category.name + " - USD " + category.cost + `</p>
+                  <p class="card-text">`+ category.description + `</p>
+                  <div class="d-flex justify-content-between align-items-center">
+  
+                    <small class="text-muted">`+ category.soldCount + ` artículos</small>
+                  </div>
+                </div>
+                </div>
                 </a>
                 `
             }
@@ -78,6 +71,7 @@ function showCategoriesList() {
 
         document.getElementById("contenido").innerHTML = htmlContentToAppend;
     }
+
 }
 
 
