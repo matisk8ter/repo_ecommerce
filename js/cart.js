@@ -102,8 +102,10 @@ function calculoSubTotal(costo, i) {
 }
 
 
+
 function showProduct(array) {
     let pCost ;
+    let simbolPrecio = "";
     
     let contenidoCarrito = "";
 
@@ -112,10 +114,13 @@ function showProduct(array) {
         let productos = array[i];
 
         if (productos.currency === "UYU") {
-            pCost = productos.unitCost / 40;
+            pCost = (productos.unitCost / 40);
+            simbolPrecio = "UYU"
         }else{
             pCost = productos.unitCost;
+            simbolPrecio = "USD"
         }
+
         
         let costSub = pCost * productos.count;
 
@@ -124,9 +129,9 @@ function showProduct(array) {
 
                 <td><img src="${productos.src}" width="150px"></td>
 
-                <td class="">${productos.name}</td>
+                <td class=""> ${productos.name}</td>
 
-                <td class="">USD ${productos.unitCost}</td>
+                <td class="">${simbolPrecio} ${productos.unitCost}</td>
             
                 <td class=""><input style="width: 60px;" onchange="calculoSubTotal(${pCost}, ${i})" type="number" id="cantidad${i}" value="${productos.count}" min="1"></td>
 
