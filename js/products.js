@@ -50,7 +50,8 @@ function showCategoriesList() {
 
             if (buscar == undefined || category.name.toLowerCase().indexOf(buscar) != -1 || category.description.toLowerCase().indexOf(buscar) != -1) {
                 htmlContentToAppend += `
-              <a href ="product-info.html" class="mt-5 col-md-6 list-group-item-action mb-4 shadow-sm"
+                
+              <a href ="product-info.html" class="mt-5 col-sm-12 col-md-6 list-group-item-action mb-4 shadow-sm"
                 <div class="col-6">
                 <img src="` + category.imgSrc + `" alt="` + category.description + `" class="img-thumbnail">
                     <div class="card-body">
